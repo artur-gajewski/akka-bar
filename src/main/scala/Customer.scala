@@ -5,7 +5,6 @@ class Customer extends Actor with ActorLogging {
     case FullPint(number) =>
       log.info(Console.GREEN + s"I'm drinking pint $number now..." + Console.RESET)
 
-      // TODO: Akka Scheduler instead: http://doc.akka.io/docs/akka/2.3.1/scala/scheduler.html
       Thread.sleep(30000)
 
       log.info(Console.CYAN + s"Done, here is the empty glass for pint $number" + Console.RESET)

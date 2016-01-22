@@ -12,7 +12,6 @@ class BarTender extends Actor with ActorLogging {
       for (number <- 1 to quantity) {
         log.info(Console.YELLOW + s"Pint $number is coming right up for ${sender.path.name}" + Console.RESET)
 
-        // TODO: Akka Scheduler instead: http://doc.akka.io/docs/akka/2.3.1/scala/scheduler.html
         Thread.sleep(5000)
 
         log.info(Console.YELLOW + s"Pint $number is ready, here you go ${sender.path.name}!" + Console.RESET)
