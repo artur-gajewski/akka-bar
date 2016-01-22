@@ -7,15 +7,15 @@ class BarTender extends Actor with ActorLogging {
     case Order(quantity) =>
       total = total + quantity
 
-      log.info(s"I received an order of $quantity pints for [${sender.path}]")
+      log.info(Console.YELLOW + s"I received an order of $quantity pints for ${sender.path.name}" + Console.RESET)
 
       for (number <- 1 to quantity) {
-        log.info(s"Pint $number is coming right up for [${sender.path}]")
+        log.info(Console.YELLOW + s"Pint $number is coming right up for ${sender.path.name}" + Console.RESET)
 
         // TODO: Akka Scheduler instead: http://doc.akka.io/docs/akka/2.3.1/scala/scheduler.html
         Thread.sleep(5000)
 
-        log.info(s"Pint $number is ready, here you go [${sender.path}]")
+        log.info(Console.YELLOW + s"Pint $number is ready, here you go ${sender.path.name}!" + Console.RESET)
 
         sender ! FullPint(number)
       }
@@ -23,7 +23,8 @@ class BarTender extends Actor with ActorLogging {
     case EmptyPint(number) =>
       total match {
         case 1 =>
-          log.info("One more round on the house for everyone! Oh sorry, I forgot we're out of beer.")
+          log.info(Console.YELLOW + "One more round on the house for everyone! Oh sorry, I forgot we're out of beer." + Console.RESET)
+          log.info(Console.RED + "THE END" + Console.RESET)
 
           context.system.terminate()
 
